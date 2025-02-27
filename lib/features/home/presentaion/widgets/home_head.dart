@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/core/theme/theme_cubit.dart';
+import 'package:y_s_flutter_task_mostafa_ameen/features/home/presentaion/bloc/stock_bloc.dart';
+import 'package:y_s_flutter_task_mostafa_ameen/features/home/presentaion/bloc/stock_event.dart';
 
 class HomeHeader extends StatelessWidget {
   @override
@@ -84,6 +84,9 @@ class HomeHeader extends StatelessWidget {
             ),
             padding: EdgeInsets.symmetric(horizontal: 12),
             child: TextField(
+                  onChanged: (value) {
+                context.read<StockBloc>().add(SearchStocks(value));
+              },
               decoration: InputDecoration(
                 hintText: 'Search Stocks...',
                 hintStyle: TextStyle(color: theme.hintColor),

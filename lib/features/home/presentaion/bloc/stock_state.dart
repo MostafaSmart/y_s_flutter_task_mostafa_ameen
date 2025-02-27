@@ -16,7 +16,8 @@ class StockLoaded extends StockState {
   final DateTime lastUpdated;
   final bool isRefreshing;
 
-  StockLoaded(this.stocks, {required this.lastUpdated, this.isRefreshing = false});
+  StockLoaded(this.stocks,
+      {required this.lastUpdated, this.isRefreshing = false});
 
   @override
   List<Object?> get props => [stocks, lastUpdated, isRefreshing];

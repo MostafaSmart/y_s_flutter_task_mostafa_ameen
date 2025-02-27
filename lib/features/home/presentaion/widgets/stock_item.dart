@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:y_s_flutter_task_mostafa_ameen/features/home/data/models/stock_model.dart';
 
 class StockItem extends StatelessWidget {
-  final String name;
-  final String symbol;
-  final String exchange;
-  final String exchangeAcronym;
-  final String exchangeWebsite;
-  final String companyDomain;
+  final Stock stackItem;
   final double percentageChange;
 
   const StockItem({
-    required this.name,
-    required this.symbol,
-    required this.exchange,
-    required this.exchangeAcronym,
-    required this.exchangeWebsite,
-    required this.companyDomain,
+    required this.stackItem,
     required this.percentageChange,
     Key? key,
   }) : super(key: key);
@@ -39,7 +30,8 @@ class StockItem extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: CachedNetworkImage(
-                    imageUrl: "https://logo.clearbit.com/$companyDomain",
+                    imageUrl:
+                        "https://logo.clearbit.com/${stackItem.stockExchange.website}",
                     width: 50,
                     height: 50,
                     fit: BoxFit.cover,
@@ -52,12 +44,14 @@ class StockItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      stackItem.name,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: theme.textTheme.titleLarge
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      symbol,
+                      stackItem.symbol,
                       style: theme.textTheme.bodyLarge?.copyWith(),
                     ),
                   ],
@@ -74,7 +68,8 @@ class StockItem extends StatelessWidget {
                     Text('Exchange:',
                         style: theme.textTheme.bodyMedium
                             ?.copyWith(fontWeight: FontWeight.bold)),
-                    Text(exchange, style: theme.textTheme.bodyMedium),
+                    Text(stackItem.stockExchange.name,
+                        style: theme.textTheme.bodyMedium),
                   ],
                 ),
                 Column(
@@ -83,7 +78,8 @@ class StockItem extends StatelessWidget {
                     Text('Acronym:',
                         style: theme.textTheme.bodyMedium
                             ?.copyWith(fontWeight: FontWeight.bold)),
-                    Text(exchangeAcronym, style: theme.textTheme.bodyMedium),
+                    Text(stackItem.stockExchange.acronym,
+                        style: theme.textTheme.bodyMedium),
                   ],
                 ),
               ],

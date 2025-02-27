@@ -3,6 +3,7 @@ import 'package:y_s_flutter_task_mostafa_ameen/core/api/api_conset.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/core/api/app_exception.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/core/api/failure_class.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/core/api/success.dart';
+import 'package:y_s_flutter_task_mostafa_ameen/core/hive/hive_service.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/features/home/data/models/stock_response.dart';
 
 abstract class StockRemoteDataSources {
@@ -11,6 +12,7 @@ abstract class StockRemoteDataSources {
 
 class StockRemoteDataSourcesImpl implements StockRemoteDataSources {
   final Dio dio = Dio();
+  HiveService hiveService = HiveService();
 
   @override
   Future<Success> getTopStock() async {
@@ -25,13 +27,17 @@ class StockRemoteDataSourcesImpl implements StockRemoteDataSources {
     final response = await dio.get(urlEndPoind);
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print('respoonse :   ${response.data}');
+      // print('respoonse :   ${response.data}');
       final s_list = StockResponse.fromJson(response.data);
 
+      print('respoonse REEmote :   ${s_list.stocks}');
+
+      await hiveService.saveStocks(s_list.stocks);
+
       return ServerSuccess(
-          message: 'done!', code: response.statusCode.toString(), data: s_list);
-
-
+          message: 'done!',
+          code: response.statusCode.toString(),
+          data: s_list.stocks);
     } else {
       print('Error remote :   ${response.statusMessage}');
 
