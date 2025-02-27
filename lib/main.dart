@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/core/theme/app_theme.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/core/theme/theme_cubit.dart';
-import 'package:y_s_flutter_task_mostafa_ameen/features/screens/home_screen.dart';
+import 'package:y_s_flutter_task_mostafa_ameen/features/home/presentaion/screen/home_screen.dart';
 
 
 void main() async {
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: themeMode,
-            home: const HomeScreen(),
+            home:  HomeScreen(),
           );
         },
       ),

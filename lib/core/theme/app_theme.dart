@@ -3,31 +3,25 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: Colors.blue,
-    scaffoldBackgroundColor: Colors.white,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.blue,
-      foregroundColor: Colors.white,
+    primaryColor: Colors.white,
+    scaffoldBackgroundColor: Colors.grey[100],
+    textTheme: TextTheme(
+      titleLarge: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+      bodyLarge: TextStyle(color: Colors.black87),
     ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Colors.black),
-      bodyMedium: TextStyle(color: Colors.black54),
-    ),
-    cardColor: Colors.grey[200],
+    iconTheme: IconThemeData(color: Colors.black54),
+    hintColor: Colors.grey,
   );
 
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: Colors.deepPurple,
-    scaffoldBackgroundColor: Colors.black,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.deepPurple,
-      foregroundColor: Colors.white,
+    primaryColor: Colors.black,
+    scaffoldBackgroundColor: Colors.grey[900],
+    textTheme: TextTheme(
+      titleLarge: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+      bodyLarge: TextStyle(color: Colors.white70),
     ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Colors.white),
-      bodyMedium: TextStyle(color: Colors.white70),
-    ),
-    cardColor: Colors.grey[800],
+    iconTheme: IconThemeData(color: Colors.white70),
+    hintColor: Colors.grey[400],
   );
 }
