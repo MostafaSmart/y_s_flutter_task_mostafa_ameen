@@ -16,3 +16,11 @@ class SearchStocks extends StockEvent {
   @override
   List<Object?> get props => [query];
 }
+class FetchDetails extends StockEvent {
+  final String stockSymbol;
+
+  FetchDetails(this.stockSymbol);
+
+  @override
+  List<Object?> get props => [stockSymbol];
+}

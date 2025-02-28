@@ -47,6 +47,7 @@ dependencies:
   intl: ^0.20.2
   lucide_icons: ^0.257.0
   dartz: ^0.10.1
+  fl_chart: ^0.63.0
 
 
 dev_dependencies:

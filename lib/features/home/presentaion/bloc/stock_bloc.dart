@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:y_s_flutter_task_mostafa_ameen/features/detels/domain/get_detels_useCase.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/features/home/data/models/stock_model.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/features/home/domain/usecase/get_top_stock_usescase.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/features/home/presentaion/bloc/stock_event.dart';
@@ -8,9 +9,13 @@ import 'package:y_s_flutter_task_mostafa_ameen/features/home/presentaion/bloc/st
 class StockBloc extends Bloc<StockEvent, StockState> {
   final GetStockUseCase getStockUseCase = GetStockUseCase();
   final List<Stock> allStocks = [];
+  final GetDetelsStockUseCase getDetailsStockUseCase = GetDetelsStockUseCase();
 
   StockBloc() : super(StockInitial()) {
     on<FetchStocks>(_onFetchStocks);
+   on<FetchDetails>(_onFetchDetails);
+
+
     on<RefreshStocks>(_onRefreshStocks);
     on<SearchStocks>(_onSearchStocks);
 
@@ -75,6 +80,26 @@ class StockBloc extends Bloc<StockEvent, StockState> {
           .toList();
 
       emit(StockLoaded(filteredStocks, lastUpdated: DateTime.now()));
+    }
+  }
+
+  
+  Future<void> _onFetchDetails(
+      FetchDetails event, Emitter<StockState> emit) async {
+    emit(StockLoading());
+
+    try {
+      (await getDetailsStockUseCase.call(event.stockSymbol)).fold(
+        (failure) {
+          emit(StockError("Failed to fetch details for ${event.stockSymbol}"));
+        },
+        (success) {
+          emit(StockDetailsLoaded(success.data));
+        },
+      );
+    } catch (e) {
+      emit(StockError("Error fetching details for ${event.stockSymbol}",
+          errorCode: 500));
     }
   }
 }

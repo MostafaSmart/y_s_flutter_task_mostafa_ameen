@@ -1,3 +1,4 @@
+import 'package:y_s_flutter_task_mostafa_ameen/features/detels/data/models/StockDetelsModel.dart';
 import 'package:y_s_flutter_task_mostafa_ameen/features/home/data/models/stock_model.dart';
 
 import 'package:equatable/equatable.dart';
@@ -31,4 +32,13 @@ class StockError extends StockState {
 
   @override
   List<Object?> get props => [message, errorCode];
+}
+
+class StockDetailsLoaded extends StockState {
+  final List<StockDetelsModel> stockDetails;
+
+  StockDetailsLoaded(this.stockDetails);
+
+  @override
+  List<Object?> get props => [stockDetails];
 }
